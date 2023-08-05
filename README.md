@@ -102,34 +102,31 @@ Which package manager do you want to use? .
 
 解决部分ESLint和Prettier冲突
 
-yarn add --dev --exact  eslint-config-prettier
+yarn add --dev --exact eslint-config-prettier
 
 ```json
 //如果你用的是ESLint，需要安装ESLint -config-Prettier，让ESLint和Prettier和睦相处。它关闭所有不必要的或可能与Prettier冲突的ESLint规则
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:vue/vue3-essential",
-        "prettier",//这是新加的一定要在最后
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "parser": "@typescript-eslint/parser",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "vue"
-    ],
-    "rules": {
-        "array-callback-return":"error"
-    }
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-essential",
+    "prettier" //这是新加的一定要在最后
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "vue"],
+  "rules": {
+    "array-callback-return": "error"
+  }
 }
 ```
 
@@ -182,7 +179,7 @@ npm run eslint//git commit之前，会执行这个脚本，错误则不会暂存
 
 ## 添加校验工具`commitlint`
 
-安装：yarn add  @commitlint/cli @commitlint/config-conventional -d -exact
+安装：yarn add @commitlint/cli @commitlint/config-conventional -d -exact
 
 新建`.commitlintrc.json`文件
 
@@ -217,7 +214,7 @@ npx --no -- commitlint --edit ${1}
 
 ## 添加lint-staged
 
-安装`lint-staged`：yarn add lint-staged  -d -exact
+安装`lint-staged`：yarn add lint-staged -d -exact
 
 ### 添加`lint-staged`配置到`package.json`中
 
@@ -230,4 +227,3 @@ npx --no -- commitlint --edit ${1}
     ]
   }
 ```
-
