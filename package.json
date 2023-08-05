@@ -10,11 +10,18 @@
     "eslint": "eslint \"src/**/*.{ts,js,vue}\" \"src/main.ts\"",
     "husky": "husky install"
   },
+  "lint-staged": {
+    "*.{ts,js,jsx,vue}": [
+      "eslint",
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@commitlint/cli": "^17.6.7",
     "@commitlint/config-conventional": "^17.6.7",
     "eslint": "^8.46.0",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "vue": "^3.3.4"
   },
   "devDependencies": {

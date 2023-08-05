@@ -184,8 +184,50 @@ npm run eslint//git commit之前，会执行这个脚本，错误则不会暂存
 
 安装：yarn add  @commitlint/cli @commitlint/config-conventional -d -exact
 
-生成`.commitlintrc.json`文件
+新建`.commitlintrc.json`文件
+
+配置，其实就这样就可以了，然后可以根据需要，更改一些默认配置，以下为示例:
 
 ```js
- echo  {"extends": ["@commitlint/config-conventional"] }   > .commitlintrc.json
+{
+  "extends": ["@commitlint/config-conventional"],
+  //提交类型，不满足直接回抛错
+  "type-enum": [
+    2,
+    "always",
+    ["feat", "fix", "docs", "style", "refactor", "test", "chore", "revert"]
+  ],
+}
 ```
+
+修改`./husky/commit-msg`钩子文件：
+
+```js
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+# 新增
+npx --no -- commitlint --edit ${1}
+```
+
+测试
+
+更改文件，然后信息输入为`修改配置文件`,会发现提交失败：
+
+修改提交信息为：`feat: 修改配置文件`，成功了！！，**记住feat冒号后面一定要有一个空格**，这算是一个坑吧。
+
+## 添加lint-staged
+
+安装`lint-staged`：yarn add lint-staged  -d -exact
+
+### 添加`lint-staged`配置到`package.json`中
+
+```json
+"lint-staged": {
+  //本地暂存库需要commit的文件才会执行以下对应脚本,eslint和prettier需要的路径会后面自动追加检测
+    "*.{ts,js,jsx,vue}": [
+      "eslint",
+      "prettier --write"
+    ]
+  }
+```
+
